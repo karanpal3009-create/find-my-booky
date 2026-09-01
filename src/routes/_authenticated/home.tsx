@@ -32,9 +32,17 @@ function Home() {
                 Choose a Delhi library
               </h1>
             </div>
-            <span className="font-mono text-xs text-muted-foreground">
-              {librariesQuery.data ? `${librariesQuery.data.length} locations` : ""}
-            </span>
+            <div className="flex items-center gap-3">
+              <Link
+                to="/search"
+                className="rounded-lg bg-azure px-4 py-2 text-sm font-medium text-paper transition-colors hover:bg-azure-deep"
+              >
+                Search all
+              </Link>
+              <span className="font-mono text-xs text-muted-foreground">
+                {librariesQuery.data ? `${librariesQuery.data.length} locations` : ""}
+              </span>
+            </div>
           </div>
 
           {librariesQuery.isPending ? (
