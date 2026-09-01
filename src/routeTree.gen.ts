@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
 import { Route as AuthenticatedManageRouteImport } from './routes/_authenticated/manage'
+import { Route as AuthenticatedSearchRouteImport } from './routes/_authenticated/search'
 import { Route as AuthenticatedBookBookIdRouteImport } from './routes/_authenticated/book.$bookId'
 import { Route as AuthenticatedLibraryLibraryIdRouteImport } from './routes/_authenticated/library.$libraryId'
 
@@ -41,6 +42,11 @@ const AuthenticatedManageRoute = AuthenticatedManageRouteImport.update({
   path: '/manage',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedSearchRoute = AuthenticatedSearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedBookBookIdRoute = AuthenticatedBookBookIdRouteImport.update({
   id: '/book/$bookId',
   path: '/book/$bookId',
@@ -58,6 +64,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/home': typeof AuthenticatedHomeRoute
   '/manage': typeof AuthenticatedManageRoute
+  '/search': typeof AuthenticatedSearchRoute
   '/book/$bookId': typeof AuthenticatedBookBookIdRoute
   '/library/$libraryId': typeof AuthenticatedLibraryLibraryIdRoute
 }
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/home': typeof AuthenticatedHomeRoute
   '/manage': typeof AuthenticatedManageRoute
+  '/search': typeof AuthenticatedSearchRoute
   '/book/$bookId': typeof AuthenticatedBookBookIdRoute
   '/library/$libraryId': typeof AuthenticatedLibraryLibraryIdRoute
 }
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/_authenticated/home': typeof AuthenticatedHomeRoute
   '/_authenticated/manage': typeof AuthenticatedManageRoute
+  '/_authenticated/search': typeof AuthenticatedSearchRoute
   '/_authenticated/book/$bookId': typeof AuthenticatedBookBookIdRoute
   '/_authenticated/library/$libraryId': typeof AuthenticatedLibraryLibraryIdRoute
 }
@@ -86,6 +95,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/home'
     | '/manage'
+    | '/search'
     | '/book/$bookId'
     | '/library/$libraryId'
   fileRoutesByTo: FileRoutesByTo
@@ -94,6 +104,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/home'
     | '/manage'
+    | '/search'
     | '/book/$bookId'
     | '/library/$libraryId'
   id:
@@ -103,6 +114,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/_authenticated/home'
     | '/_authenticated/manage'
+    | '/_authenticated/search'
     | '/_authenticated/book/$bookId'
     | '/_authenticated/library/$libraryId'
   fileRoutesById: FileRoutesById
@@ -150,6 +162,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedManageRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/search': {
+      id: '/_authenticated/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof AuthenticatedSearchRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/book/$bookId': {
       id: '/_authenticated/book/$bookId'
       path: '/book/$bookId'
@@ -170,6 +189,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute
   AuthenticatedManageRoute: typeof AuthenticatedManageRoute
+  AuthenticatedSearchRoute: typeof AuthenticatedSearchRoute
   AuthenticatedBookBookIdRoute: typeof AuthenticatedBookBookIdRoute
   AuthenticatedLibraryLibraryIdRoute: typeof AuthenticatedLibraryLibraryIdRoute
 }
@@ -177,6 +197,7 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedHomeRoute: AuthenticatedHomeRoute,
   AuthenticatedManageRoute: AuthenticatedManageRoute,
+  AuthenticatedSearchRoute: AuthenticatedSearchRoute,
   AuthenticatedBookBookIdRoute: AuthenticatedBookBookIdRoute,
   AuthenticatedLibraryLibraryIdRoute: AuthenticatedLibraryLibraryIdRoute,
 }
