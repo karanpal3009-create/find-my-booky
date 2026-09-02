@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { toast } from "sonner";
+
 import { AppShell } from "@/components/AppShell";
 
 export const Route = createFileRoute("/_authenticated/subscription")({
@@ -142,21 +142,19 @@ function Subscription() {
                   ))}
                 </ul>
 
-                <button
-                  onClick={() => {
-                    setSelected(plan.id);
-                    toast.success(
-                      `${plan.name} plan selected — ₹${plan.price}/month. Checkout isn't wired up in this demo yet.`,
-                    );
-                  }}
-                  className={`mt-6 w-full rounded-lg px-4 py-2.5 text-sm font-medium transition-colors ${
+                <Link
+                  to="/checkout"
+                  search={{ plan: plan.id }}
+                  onClick={() => setSelected(plan.id)}
+                  className={`mt-6 w-full rounded-lg px-4 py-2.5 text-center text-sm font-medium transition-colors ${
                     plan.featured
                       ? "bg-ochre text-paper hover:bg-ochre-deep"
                       : "bg-azure text-paper hover:bg-azure-deep"
                   }`}
                 >
                   {selected === plan.id ? "Selected ✓" : `Choose ${plan.name}`}
-                </button>
+                </Link>
+
               </div>
             ))}
           </div>
