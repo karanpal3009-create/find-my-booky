@@ -42,6 +42,13 @@ export function AppShell({ children }: { children: ReactNode }) {
             >
               Search
             </Link>
+            <Link
+              to="/subscription"
+              className="px-3 py-2 text-muted-foreground transition-colors hover:text-foreground"
+              activeProps={{ className: "px-3 py-2 text-foreground font-medium" }}
+            >
+              Plans
+            </Link>
             {isAdmin ? (
               <Link
                 to="/manage"
