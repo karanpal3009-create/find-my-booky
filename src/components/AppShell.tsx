@@ -42,13 +42,16 @@ export function AppShell({ children }: { children: ReactNode }) {
             >
               Search
             </Link>
-            <Link
-              to="/manage"
-              className="px-3 py-2 text-muted-foreground transition-colors hover:text-foreground"
-              activeProps={{ className: "px-3 py-2 text-foreground font-medium" }}
-            >
-              Manage
-            </Link>
+            {isAdmin ? (
+              <Link
+                to="/manage"
+                className="px-3 py-2 text-muted-foreground transition-colors hover:text-foreground"
+                activeProps={{ className: "px-3 py-2 text-foreground font-medium" }}
+              >
+                Manage
+              </Link>
+            ) : null}
+
             <button
               onClick={handleSignOut}
               className="ml-1 rounded-md bg-primary px-4 py-2 font-medium text-primary-foreground transition-colors hover:bg-ochre-deep"
