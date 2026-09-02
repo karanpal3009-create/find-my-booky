@@ -40,12 +40,14 @@ const emptyForm = (libraryId: string): BookInput => ({
 });
 
 function ManageBooks() {
+  const { isAdmin, isLoading: roleLoading } = useIsAdmin();
   const queryClient = useQueryClient();
   const librariesQuery = useQuery({ queryKey: ["libraries"], queryFn: fetchLibraries });
   const booksQuery = useQuery({ queryKey: ["books", "all"], queryFn: fetchAllBooks });
 
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState<BookInput>(emptyForm(""));
+
 
   const libraries = librariesQuery.data ?? [];
   const libraryId = form.library_id || libraries[0]?.id || "";
