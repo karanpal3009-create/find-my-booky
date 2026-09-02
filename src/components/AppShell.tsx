@@ -60,6 +60,18 @@ export function AppShell({ children }: { children: ReactNode }) {
             ) : null}
 
             <button
+              onClick={() =>
+                toast.info("App download", {
+                  description:
+                    "Installable app support is coming soon. For now, this demo button is just a placeholder.",
+                })
+              }
+              className="ml-1 rounded-md border border-input px-4 py-2 font-medium text-foreground transition-colors hover:bg-accent"
+            >
+              Download app
+            </button>
+
+            <button
               onClick={handleSignOut}
               className="ml-1 rounded-md bg-primary px-4 py-2 font-medium text-primary-foreground transition-colors hover:bg-ochre-deep"
             >
