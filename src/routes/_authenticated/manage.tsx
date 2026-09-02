@@ -3,6 +3,8 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { toast } from "sonner";
 import { AppShell, LoadingRows, StateBlock, StatusPill } from "@/components/AppShell";
+import { useIsAdmin } from "@/hooks/useIsAdmin";
+
 import {
   createBook,
   deleteBook,
@@ -40,12 +42,14 @@ const emptyForm = (libraryId: string): BookInput => ({
 });
 
 function ManageBooks() {
+  const { isAdmin, isLoading: roleLoading } = useIsAdmin();
   const queryClient = useQueryClient();
   const librariesQuery = useQuery({ queryKey: ["libraries"], queryFn: fetchLibraries });
   const booksQuery = useQuery({ queryKey: ["books", "all"], queryFn: fetchAllBooks });
 
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState<BookInput>(emptyForm(""));
+
 
   const libraries = librariesQuery.data ?? [];
   const libraryId = form.library_id || libraries[0]?.id || "";
@@ -92,7 +96,36 @@ function ManageBooks() {
     "w-full rounded-lg border border-input bg-background px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-ring";
   const labelClass = "font-mono text-[11px] uppercase tracking-wider text-muted-foreground";
 
+  if (roleLoading) {
+    return (
+      <AppShell>
+        <section className="bg-cream">
+          <div className="mx-auto max-w-6xl px-5 py-14">
+            <LoadingRows count={3} />
+          </div>
+        </section>
+      </AppShell>
+    );
+  }
+
+  if (!isAdmin) {
+    return (
+      <AppShell>
+        <section className="bg-cream">
+          <div className="mx-auto max-w-2xl px-5 py-20">
+            <StateBlock
+              tone="error"
+              title="Admins only"
+              description="This account has view-only access. Browsing and searching the catalogue is available from Home and Search."
+            />
+          </div>
+        </section>
+      </AppShell>
+    );
+  }
+
   return (
+
     <AppShell>
       <section className="bg-cream">
         <div className="mx-auto max-w-6xl px-5 py-14">
