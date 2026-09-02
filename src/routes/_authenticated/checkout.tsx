@@ -3,16 +3,26 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { AppShell } from "@/components/AppShell";
 
-const PLANS: Record<string, { name: string; price: number; catalogues: string }> = {
+type PlanInfo = { name: string; price: number; catalogues: string };
+
+const PLANS: Record<string, PlanInfo | undefined> = {
   reader: { name: "Reader", price: 100, catalogues: "5 library catalogues" },
   scholar: { name: "Scholar", price: 250, catalogues: "20 library catalogues" },
   archivist: { name: "Archivist", price: 500, catalogues: "100+ catalogues, Delhi & beyond" },
 };
 
+const DEFAULT_PLAN: PlanInfo = {
+  name: "Scholar",
+  price: 250,
+  catalogues: "20 library catalogues",
+};
+
 export const Route = createFileRoute("/_authenticated/checkout")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    plan: typeof search.plan === "string" && search.plan in PLANS ? search.plan : "scholar",
-  }),
+  validateSearch: (search: Record<string, unknown>) => {
+    const raw = search["plan"];
+    return { plan: typeof raw === "string" && PLANS[raw] ? raw : "scholar" };
+  },
+
   head: () => ({
     meta: [
       { title: "Checkout — LibFind" },
