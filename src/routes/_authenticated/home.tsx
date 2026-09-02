@@ -138,6 +138,32 @@ function Home() {
         </div>
       </section>
 
+      {/* Subscription teaser */}
+      <section className="bg-paper">
+        <div className="mx-auto max-w-6xl px-5 py-12">
+          <div className="flex flex-col items-start justify-between gap-6 rounded-2xl bg-card p-7 ring-1 ring-border sm:flex-row sm:items-center">
+            <div>
+              <p className="font-mono text-xs uppercase tracking-[0.28em] text-ochre-deep">
+                Membership
+              </p>
+              <h2 className="mt-2 font-display text-2xl font-bold">
+                Unlock more library catalogues
+              </h2>
+              <p className="mt-2 max-w-xl text-sm text-muted-foreground">
+                ₹100/month for 5 catalogues · ₹250/month for 20 · ₹500/month for 100+ libraries
+                across Delhi and other states.
+              </p>
+            </div>
+            <Link
+              to="/subscription"
+              className="shrink-0 rounded-lg bg-ochre px-5 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-ochre-deep"
+            >
+              See plans
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Library grid */}
       <section id="libraries" className="bg-cream scroll-mt-20">
         <div className="mx-auto max-w-6xl px-5 py-14">

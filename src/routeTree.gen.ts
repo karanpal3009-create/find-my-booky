@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
 import { Route as AuthenticatedManageRouteImport } from './routes/_authenticated/manage'
 import { Route as AuthenticatedSearchRouteImport } from './routes/_authenticated/search'
+import { Route as AuthenticatedSubscriptionRouteImport } from './routes/_authenticated/subscription'
 import { Route as AuthenticatedBookBookIdRouteImport } from './routes/_authenticated/book.$bookId'
 import { Route as AuthenticatedLibraryLibraryIdRouteImport } from './routes/_authenticated/library.$libraryId'
 
@@ -47,6 +48,12 @@ const AuthenticatedSearchRoute = AuthenticatedSearchRouteImport.update({
   path: '/search',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedSubscriptionRoute =
+  AuthenticatedSubscriptionRouteImport.update({
+    id: '/subscription',
+    path: '/subscription',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedBookBookIdRoute = AuthenticatedBookBookIdRouteImport.update({
   id: '/book/$bookId',
   path: '/book/$bookId',
@@ -65,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/home': typeof AuthenticatedHomeRoute
   '/manage': typeof AuthenticatedManageRoute
   '/search': typeof AuthenticatedSearchRoute
+  '/subscription': typeof AuthenticatedSubscriptionRoute
   '/book/$bookId': typeof AuthenticatedBookBookIdRoute
   '/library/$libraryId': typeof AuthenticatedLibraryLibraryIdRoute
 }
@@ -74,6 +82,7 @@ export interface FileRoutesByTo {
   '/home': typeof AuthenticatedHomeRoute
   '/manage': typeof AuthenticatedManageRoute
   '/search': typeof AuthenticatedSearchRoute
+  '/subscription': typeof AuthenticatedSubscriptionRoute
   '/book/$bookId': typeof AuthenticatedBookBookIdRoute
   '/library/$libraryId': typeof AuthenticatedLibraryLibraryIdRoute
 }
@@ -85,6 +94,7 @@ export interface FileRoutesById {
   '/_authenticated/home': typeof AuthenticatedHomeRoute
   '/_authenticated/manage': typeof AuthenticatedManageRoute
   '/_authenticated/search': typeof AuthenticatedSearchRoute
+  '/_authenticated/subscription': typeof AuthenticatedSubscriptionRoute
   '/_authenticated/book/$bookId': typeof AuthenticatedBookBookIdRoute
   '/_authenticated/library/$libraryId': typeof AuthenticatedLibraryLibraryIdRoute
 }
@@ -96,6 +106,7 @@ export interface FileRouteTypes {
     | '/home'
     | '/manage'
     | '/search'
+    | '/subscription'
     | '/book/$bookId'
     | '/library/$libraryId'
   fileRoutesByTo: FileRoutesByTo
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
     | '/home'
     | '/manage'
     | '/search'
+    | '/subscription'
     | '/book/$bookId'
     | '/library/$libraryId'
   id:
@@ -115,6 +127,7 @@ export interface FileRouteTypes {
     | '/_authenticated/home'
     | '/_authenticated/manage'
     | '/_authenticated/search'
+    | '/_authenticated/subscription'
     | '/_authenticated/book/$bookId'
     | '/_authenticated/library/$libraryId'
   fileRoutesById: FileRoutesById
@@ -169,6 +182,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSearchRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/subscription': {
+      id: '/_authenticated/subscription'
+      path: '/subscription'
+      fullPath: '/subscription'
+      preLoaderRoute: typeof AuthenticatedSubscriptionRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/book/$bookId': {
       id: '/_authenticated/book/$bookId'
       path: '/book/$bookId'
@@ -190,6 +210,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute
   AuthenticatedManageRoute: typeof AuthenticatedManageRoute
   AuthenticatedSearchRoute: typeof AuthenticatedSearchRoute
+  AuthenticatedSubscriptionRoute: typeof AuthenticatedSubscriptionRoute
   AuthenticatedBookBookIdRoute: typeof AuthenticatedBookBookIdRoute
   AuthenticatedLibraryLibraryIdRoute: typeof AuthenticatedLibraryLibraryIdRoute
 }
@@ -198,6 +219,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedHomeRoute: AuthenticatedHomeRoute,
   AuthenticatedManageRoute: AuthenticatedManageRoute,
   AuthenticatedSearchRoute: AuthenticatedSearchRoute,
+  AuthenticatedSubscriptionRoute: AuthenticatedSubscriptionRoute,
   AuthenticatedBookBookIdRoute: AuthenticatedBookBookIdRoute,
   AuthenticatedLibraryLibraryIdRoute: AuthenticatedLibraryLibraryIdRoute,
 }
