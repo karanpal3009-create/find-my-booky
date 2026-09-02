@@ -56,7 +56,7 @@ const METHODS: { id: Method; label: string; hint: string; glyph: string }[] = [
 function Checkout() {
   const { plan: planId } = Route.useSearch();
   const navigate = useNavigate();
-  const plan = PLANS[planId] ?? PLANS.scholar;
+  const plan: PlanInfo = PLANS[planId] ?? DEFAULT_PLAN;
 
   const [method, setMethod] = useState<Method>("gpay");
   const [upiId, setUpiId] = useState("");
