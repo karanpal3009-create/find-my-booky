@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import type { ReactNode } from "react";
+import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useIsAdmin } from "@/hooks/useIsAdmin";
 
@@ -58,6 +59,18 @@ export function AppShell({ children }: { children: ReactNode }) {
                 Manage
               </Link>
             ) : null}
+
+            <button
+              onClick={() =>
+                toast.info("App download", {
+                  description:
+                    "Installable app support is coming soon. For now, this demo button is just a placeholder.",
+                })
+              }
+              className="ml-1 rounded-md border border-input px-4 py-2 font-medium text-foreground transition-colors hover:bg-accent"
+            >
+              Download app
+            </button>
 
             <button
               onClick={handleSignOut}
