@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { toast } from "sonner";
+
 import { AppShell } from "@/components/AppShell";
 
 export const Route = createFileRoute("/_authenticated/subscription")({
