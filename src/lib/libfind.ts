@@ -20,6 +20,20 @@ export async function fetchLibraryCounts(): Promise<Record<string, number>> {
   return counts;
 }
 
+export type BookStats = { total: number; available: number };
+
+export async function fetchBookStats(): Promise<BookStats> {
+  const { data, error } = await supabase.from("books").select("available");
+  if (error) throw error;
+  let total = 0;
+  let available = 0;
+  for (const row of data ?? []) {
+    total += 1;
+    if (row.available) available += 1;
+  }
+  return { total, available };
+}
+
 export async function fetchLibrary(id: string): Promise<Library | null> {
   const { data, error } = await supabase.from("libraries").select("*").eq("id", id).maybeSingle();
   if (error) throw error;
