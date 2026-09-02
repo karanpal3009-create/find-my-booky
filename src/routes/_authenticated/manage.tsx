@@ -3,6 +3,8 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { toast } from "sonner";
 import { AppShell, LoadingRows, StateBlock, StatusPill } from "@/components/AppShell";
+import { useIsAdmin } from "@/hooks/useIsAdmin";
+
 import {
   createBook,
   deleteBook,
