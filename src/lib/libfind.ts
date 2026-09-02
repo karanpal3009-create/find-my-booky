@@ -91,3 +91,9 @@ export async function deleteBook(id: string) {
   const { error } = await supabase.from("books").delete().eq("id", id);
   if (error) throw error;
 }
+
+/** Google Maps directions/search link for a library address. */
+export function mapsUrl(library: Pick<Library, "name" | "address" | "city">) {
+  const q = encodeURIComponent(`${library.name}, ${library.address}, ${library.city}`);
+  return `https://www.google.com/maps/search/?api=1&query=${q}`;
+}

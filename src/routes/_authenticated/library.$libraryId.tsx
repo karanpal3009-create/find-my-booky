@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { AppShell, LoadingRows, StateBlock, StatusPill } from "@/components/AppShell";
-import { fetchBooksByLibrary, fetchLibrary, type ItemType } from "@/lib/libfind";
+import { fetchBooksByLibrary, fetchLibrary, mapsUrl, type ItemType } from "@/lib/libfind";
 
 export const Route = createFileRoute("/_authenticated/library/$libraryId")({
   head: () => ({
@@ -65,9 +65,19 @@ function LibraryDetail() {
               </h1>
             </div>
             {libraryQuery.data ? (
-              <span className="font-mono text-xs text-cream/50">
-                {libraryQuery.data.address} · {libraryQuery.data.city}
-              </span>
+              <div className="flex flex-col items-start gap-2 sm:items-end">
+                <span className="font-mono text-xs text-cream/50">
+                  {libraryQuery.data.address} · {libraryQuery.data.city}
+                </span>
+                <a
+                  href={mapsUrl(libraryQuery.data)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-lg bg-ochre px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider text-paper transition-colors hover:bg-ochre-deep"
+                >
+                  ◎ Directions on Google Maps
+                </a>
+              </div>
             ) : null}
           </div>
 

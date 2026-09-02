@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { AppShell, LoadingRows, StateBlock } from "@/components/AppShell";
-import { fetchLibraries, fetchLibraryCounts, fetchBookStats } from "@/lib/libfind";
+import { fetchLibraries, fetchLibraryCounts, fetchBookStats, mapsUrl } from "@/lib/libfind";
 
 export const Route = createFileRoute("/_authenticated/home")({
   head: () => ({
@@ -195,9 +195,32 @@ function Home() {
                       </span>
                     </div>
                     <div>
-                      <h3 className="font-display text-xl font-bold tracking-tight">
-                        {library.name}
-                      </h3>
+                      <div className="flex items-start justify-between gap-2">
+                        <h3 className="font-display text-xl font-bold tracking-tight">
+                          {library.name}
+                        </h3>
+                        <span
+                          role="link"
+                          tabIndex={0}
+                          title={`Open ${library.name} in Google Maps`}
+                          aria-label={`Open ${library.name} in Google Maps`}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            window.open(mapsUrl(library), "_blank", "noopener,noreferrer");
+                          }}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              window.open(mapsUrl(library), "_blank", "noopener,noreferrer");
+                            }
+                          }}
+                          className="mt-1 shrink-0 cursor-pointer rounded-md border border-input px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-azure-deep transition-colors hover:bg-azure hover:text-paper"
+                        >
+                          ◎ Map
+                        </span>
+                      </div>
                       <p className="mt-1 text-sm text-muted-foreground">
                         {library.address} · {library.city}
                       </p>
