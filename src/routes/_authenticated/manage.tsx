@@ -96,7 +96,36 @@ function ManageBooks() {
     "w-full rounded-lg border border-input bg-background px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-ring";
   const labelClass = "font-mono text-[11px] uppercase tracking-wider text-muted-foreground";
 
+  if (roleLoading) {
+    return (
+      <AppShell>
+        <section className="bg-cream">
+          <div className="mx-auto max-w-6xl px-5 py-14">
+            <LoadingRows count={3} />
+          </div>
+        </section>
+      </AppShell>
+    );
+  }
+
+  if (!isAdmin) {
+    return (
+      <AppShell>
+        <section className="bg-cream">
+          <div className="mx-auto max-w-2xl px-5 py-20">
+            <StateBlock
+              tone="error"
+              title="Admins only"
+              description="This account has view-only access. Browsing and searching the catalogue is available from Home and Search."
+            />
+          </div>
+        </section>
+      </AppShell>
+    );
+  }
+
   return (
+
     <AppShell>
       <section className="bg-cream">
         <div className="mx-auto max-w-6xl px-5 py-14">
