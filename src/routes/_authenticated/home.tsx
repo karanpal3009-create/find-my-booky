@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { AppShell, LoadingRows, StateBlock } from "@/components/AppShell";
-import { fetchLibraries, fetchLibraryCounts, fetchBookStats } from "@/lib/libfind";
+import { fetchLibraries, fetchLibraryCounts, fetchBookStats, mapsUrl } from "@/lib/libfind";
 
 export const Route = createFileRoute("/_authenticated/home")({
   head: () => ({
